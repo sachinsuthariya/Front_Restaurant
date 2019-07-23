@@ -1,0 +1,71 @@
+<div class="container" style="padding-top: 30px">
+  <h2>SignUp</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="ownerName">Owner Name</label>
+      <input type="text" formControlName="ownerName" id="ownerName" class="form-control"
+        [ngClass]="{ 'is-invalid': isSubmitted && form.ownerName.errors }" />
+      <div *ngIf="isSubmitted && form.ownerName.errors" class="invalid-feedback">
+        <div *ngIf="form.ownerName.errors.required">Please Enter owner name</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="resName">Restaurant Name</label>
+      <input type="text" formControlName="resName" id="resName" class="form-control"
+        [ngClass]="{ 'is-invalid': isSubmitted && form.resName.errors }" />
+      <div *ngIf="isSubmitted && form.resName.errors" class="invalid-feedback">
+        <div *ngIf="form.resName.errors.required">Please enter restaurant name</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+
+      <select formControlName="city" id="city" class="form-control"
+        [ngClass]="{ 'is-invalid': isSubmitted && form.city.errors }">
+        <option *ngFor="let cityname  of city" [value]="cityname"> {{cityname}} </option>
+      </select>
+
+      <div *ngIf="isSubmitted && form.city.errors" class="invalid-feedback">
+        <div *ngIf="form.city.errors.required">Please select city</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea formControlName="address" id="address" class="form-control" cols="30"
+        [ngClass]="{ 'is-invalid': isSubmitted && form.city.errors }"></textarea>
+      <div *ngIf="isSubmitted && form.address.errors" class="invalid-feedback">
+        <div *ngIf="form.address.errors.required">Please choose city</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <input type="email" formControlName="email" class="form-control"
+        [ngClass]="{ 'is-invalid': isSubmitted && form.email.errors }" />
+      <div *ngIf="isSubmitted && form.email.errors" class="invalid-feedback">
+        <div *ngIf="form.email.errors.required">Please enter email</div>
+        <div *ngIf="form.email.touched && form.email.invalid"> Please enter valid email </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile</label>
+      <input type="text" formControlName="mobile" id="mobile" class="form-control"
+        [ngClass]="{ 'is-invalid': isSubmitted && form.mobile.errors }" />
+      <div *ngIf="isSubmitted && form.mobile.errors" class="invalid-feedback">
+        <div *ngIf="form.mobile.errors.required">Please enter mobile number</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary">Register</button> |
+      <!-- <img *ngIf="loading"
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> -->
+      <a routerLink="/login" class="btn btn-primary">Switch to Login</a>
+    </div>
+  </form>
+</div>
