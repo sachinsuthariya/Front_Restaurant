@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+
+import { NgxSpinnerService } from "ngx-spinner";
+import { NotifierService } from "angular-notifier";
+
+import { LoginService } from "./login.service";
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,16 +16,25 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   //variables
+  loginSubscription: Subscription;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService,
+    private loginService: LoginService) { }
 
   ngOnInit() {
 
     //form control validators
+    // this.loginForm = this.formBuilder.group({
+    //   email: ["", [Validators.email, Validators.required]],
+    //   password: ["", Validators.required]
+    // });
+
     this.loginForm = this.formBuilder.group({
-      email: ["", [Validators.email, Validators.required]],
-      password: ["", Validators.required]
+      email: [""],
+      password: [""]
     });
   }
 
@@ -35,8 +50,22 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    this.spinner.show();
+    this.loginSubscription = this.loginService.onLogin(this.loginForm.value).subscribe(res => {
+      console.log(res);
+      let response = res;
+      if (response["succes"]) {
 
-    this.loginForm.reset();
+      } else {
+        this.loginForm.reset();
+        this.notifier.notify("error", response["error"]["message"]);
+      }
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+    })
+
+
 
   }
 
