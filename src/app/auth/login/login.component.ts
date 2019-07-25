@@ -54,11 +54,16 @@ export class LoginComponent implements OnInit {
     this.loginSubscription = this.loginService.onLogin(this.loginForm.value).subscribe(res => {
       console.log(res);
       let response = res;
-      if (response["succes"]) {
+      console.log(response);
 
+      if (response["success"]) {
+        console.log("success");
+
+        this.notifier.notify("success", "Authenticatio successful");
       } else {
         this.loginForm.reset();
-        this.notifier.notify("error", response["error"]["message"]);
+        console.log("successssssssssssssss");
+        this.notifier.notify("error", "fail");
       }
       this.spinner.hide();
     }, err => {

@@ -59,9 +59,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.registerSubscription.unsubscribe();
+    if (this.registerSubscription) {
+      this.registerSubscription.unsubscribe();
+    }
   }
-
 
   // convience getter to easy access form field
   get form() {
@@ -79,11 +80,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.spinner.show();
     this.registerSubscription = this.registerService.registerRestaurant(this.signupForm.value)
       .subscribe(res => {
-        if (res["success"]) {
-          this.notifier.notify("success", "Restaurant registerd successfully");
+        console.log(res, "res");
+        const response = res;
+        if (response["success"]) {
+          this.notifier.notify("success", response["message"]);
           this.signupForm.reset();
         } else {
-          this.notifier.notify("error", res["error"]["message"]);
+          this.notifier.notify("error", response["error"]["message"]);
+          console.log(response["error"]["message"], "regisytrrersd");
+
           // this.signupForm.reset();
         }
         this.spinner.hide();
@@ -91,5 +96,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.spinner.hide();
       });
   }
+
+
+
+
 
 }

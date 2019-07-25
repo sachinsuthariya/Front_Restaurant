@@ -9,6 +9,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   onLogin(loginData: object) {
-    return this.http.post(environment.API_URL + "", loginData);
+    return this.http.post(environment.API_URL + "restaurant/login", loginData);
   }
 }
