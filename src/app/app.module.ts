@@ -12,6 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NotifierModule } from "angular-notifier";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { RestaurantComponent } from './restaurant/restaurant.component';
+import { UserComponent } from './restaurant/user/user.component';
+import { AdminComponent } from './restaurant/admin/admin.component';
+import { ListRestaurantComponent } from './restaurant/admin/list-restaurant/list-restaurant.component';
+import { AddBarchComponent } from './restaurant/user/add-barch/add-barch.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +25,12 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HeaderComponent,
     AuthComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RestaurantComponent,
+    UserComponent,
+    AdminComponent,
+    ListRestaurantComponent,
+    AddBarchComponent,
   ],
   imports: [
     BrowserModule,

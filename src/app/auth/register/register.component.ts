@@ -6,6 +6,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { RegisterService } from "./register.service";
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -30,7 +31,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
     private readonly notifier: NotifierService,
     private registerService: RegisterService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    private router: Router) {
 
 
   }
@@ -83,10 +85,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
         console.log(res, "res");
         const response = res;
         if (response["success"]) {
+
           this.notifier.notify("success", response["message"]);
           this.signupForm.reset();
+          this.router.navigate(["login"]);
         } else {
-          this.notifier.notify("error", response["error"]["message"]);
+          if (response["error"]["message"]) {
+            this.notifier.notify("error", response["error"]["message"]);
+          } else {
+            this.notifier.notify("error", response["message"]);
+          }
           console.log(response["error"]["message"], "regisytrrersd");
 
           // this.signupForm.reset();

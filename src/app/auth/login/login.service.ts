@@ -11,4 +11,12 @@ export class LoginService {
   onLogin(loginData: object) {
     return this.http.post(environment.API_URL + "restaurant/login", loginData);
   }
+
+  isLogin() {
+    return !!localStorage.getItem("token");
+  }
+
+  getToken() {
+    return localStorage.getItem("token");
+  }
 }

@@ -6,6 +6,7 @@ import { NotifierService } from "angular-notifier";
 
 import { LoginService } from "./login.service";
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private notifier: NotifierService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -57,18 +59,25 @@ export class LoginComponent implements OnInit {
       console.log(response);
 
       if (response["success"]) {
-        console.log("success");
+        // console.log("success");
+        if (response["body"][0]["isadmin"]) {
+          this.router.navigate(["admin"]);
+        } else {
+          this.router.navigate(["user"]);
+        }
+        let token = response["body"][0]["token"];
+        console.log("token", token);
 
-        this.notifier.notify("success", "Authenticatio successful");
+        localStorage.setItem("token", token);
+        this.notifier.notify("success", response["message"]);
       } else {
         this.loginForm.reset();
-        console.log("successssssssssssssss");
-        this.notifier.notify("error", "fail");
+        this.notifier.notify("error", response["message"]);
       }
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-    })
+    });
 
 
 
