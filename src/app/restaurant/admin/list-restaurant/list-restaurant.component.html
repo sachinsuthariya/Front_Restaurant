@@ -5,11 +5,15 @@
     <option *ngFor="let i of restaurantList" [value]="i.restaurantName">{{i.restaurantName}}</option>
   </select>
 </div>
+
 <hr>
+
 <div *ngFor="let rest of restaurantList">
   <a style="cursor: pointer" routerLinkActive="active"
-    class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center">
-    <div class="flex-column">
+    class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center"
+    (click)="adminService.onRestaurant(rest.restaurantName, rest._id)">
+
+    <div class=" flex-column">
       {{ rest.restaurantName }}
       <p><small>{{ rest.city }}</small></p>
     </div>
@@ -17,5 +21,6 @@
       <img src="https://pearlmorissette.com/images/TheRestaurant.png" class="img-fluid" [alt]="rest.restaurantName"
         style="max-width: 80px">
     </div>
+
   </a>
 </div>

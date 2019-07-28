@@ -1,0 +1,20 @@
+.left_btn {
+  margin-left: 185px;
+  margin-top: 10px;
+}
+
+.rest_area {
+  background-color: steelblue;
+  text-align: center;
+  border: 5px solid black;
+}
+
+.mng_rest {
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.rest {
+  border: 2px solid black;
+  padding: 100px;
+}

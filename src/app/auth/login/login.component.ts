@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   // form group
   loginForm: FormGroup;
 
@@ -38,6 +38,13 @@ export class LoginComponent implements OnInit {
       email: [""],
       password: [""]
     });
+  }
+
+
+  ngOnDestroy() {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
   }
 
   // convience getter to easy access form control
@@ -78,8 +85,6 @@ export class LoginComponent implements OnInit {
     }, err => {
       this.spinner.hide();
     });
-
-
 
   }
 

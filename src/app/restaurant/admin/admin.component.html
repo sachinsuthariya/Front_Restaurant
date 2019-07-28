@@ -1,10 +1,53 @@
-<!-- <p>admin works!</p>
--->
+<button class="btn btn-primary left_btn" (click)="addRest()">Add Restaurant</button>
 
-<div class="row">
-  <div class="col-xl-12">
-    <div class="col-xl-3">
-      <app-list-restaurant></app-list-restaurant>
+<div class="row" style="padding-top: 100px">
+  <div class="col-md-3" style="padding-left: 200px">
+    <app-list-restaurant (click)="onRestaurantData()"></app-list-restaurant>
+  </div>
+
+  <div class="col-md-7" style="padding-left: 100px">
+    <div class="rest">
+
+      <app-add-barch *ngIf="Add_Branch"></app-add-barch>
+
+      <app-register *ngIf="Add_Rest"></app-register>
+
+
+      <!-- Restaurant Management -->
+      <div *ngIf="Mng_Rest">
+        <h2 class="rest_area"> <strong>Manage {{Restaurant_Name}} Restaurant.
+          </strong> </h2>
+        <hr>
+
+        <a routerLinkActive="active"
+          class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center btn btn-primary mng_rest"
+          (click)="addBranch(Restaurant_Name, Restaurant_Id)">
+
+          <div class=" flex-column">
+            <h3>Add New Branches to the {{Restaurant_Name}} Restaurant.</h3>
+          </div>
+          <div class="image-parent">
+            <img src="https://pearlmorissette.com/images/TheRestaurant.png" class="img-fluid" [alt]="aa"
+              style="max-width: 80px">
+          </div>
+
+        </a>
+
+        <a routerLinkActive="active"
+          class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center btn btn-primary mng_rest"
+          (click)="editBranch(Restaurant_Name, Restaurant_Id)">
+
+          <div class=" flex-column">
+            <h3>Edit Exist Branches of {{Restaurant_Name}} Restaurant.</h3>
+          </div>
+          <div class="image-parent">
+            <img src="https://pearlmorissette.com/images/TheRestaurant.png" class="img-fluid" [alt]="aa"
+              style="max-width: 80px">
+          </div>
+
+        </a>
+
+      </div>
     </div>
   </div>
 </div>

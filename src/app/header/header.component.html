@@ -9,18 +9,21 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/']">Home <span
+        <a class="nav-link" routerLinkActive="active" *ngIf="!!loginService.isLogin()" [routerLink]="['/']">Home <span
             class="sr-only">(current)</span></a>
       </li>
 
 
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="login">Log In</a>
+        <a class="nav-link" routerLinkActive="active" *ngIf="!loginService.isLogin()" routerLink="login">Log In</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="register">Sign Up</a>
-      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" *ngIf="!loginService.isLogin()" routerLink="register">Sign Up</a>
+      </li> -->
 
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" *ngIf="!!loginService.isLogin()" (click)="onLogout()">Logout</a>
+      </li>
 
     </ul>
 

@@ -17,6 +17,7 @@ import { UserComponent } from './restaurant/user/user.component';
 import { AdminComponent } from './restaurant/admin/admin.component';
 import { ListRestaurantComponent } from './restaurant/admin/list-restaurant/list-restaurant.component';
 import { AddBarchComponent } from './restaurant/user/add-barch/add-barch.component';
+import { ManageBranchComponent } from './restaurant/user/manage-branch/manage-branch.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AddBarchComponent } from './restaurant/user/add-barch/add-barch.compone
     AdminComponent,
     ListRestaurantComponent,
     AddBarchComponent,
+    ManageBranchComponent,
   ],
   imports: [
     BrowserModule,

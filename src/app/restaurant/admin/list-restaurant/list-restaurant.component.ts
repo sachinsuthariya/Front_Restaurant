@@ -37,9 +37,15 @@ export class ListRestaurantComponent implements OnInit {
         console.log(res, "list restaurant ");
         let response = res;
         this.restaurantList = response["body"][0];
+
         console.log(this.restaurantList);
 
       });
   }
+
+  // onRestaurant(resId, resName) {
+  //   console.log("onRestaurant click", resId, resName);
+
+  // }
 
 }

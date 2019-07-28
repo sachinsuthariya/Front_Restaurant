@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminServiceService } from './admin-service.service';
+import { UserServiceService } from '../user/user-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -6,11 +8,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  Add_Rest = true;
+  Add_Branch = false;
+  Mng_Rest = false;
 
-  constructor() { }
+  Restaurant_Name: string;
+  Restaurant_Id;
 
-  ngOnInit() {
+  constructor(private adminService: AdminServiceService,
+    private userService: UserServiceService) {
+
+
   }
 
-  
+  ngOnInit() {
+    let data = this.adminService.restaurantData;
+    console.log("data of restaurantr", data);
+  }
+
+  addRest() {
+    // this.addRestaurant = true;
+    // this.Restaurant_Name = "";
+    this.Add_Rest = true;
+    this.Add_Branch = false;
+    this.Mng_Rest = false;
+  }
+
+  onRestaurantData() {
+    this.Mng_Rest = true;
+    this.Restaurant_Name = this.adminService.restaurantData["restName"];
+    this.Restaurant_Id = this.adminService.restaurantData["rest_id"]
+    console.log("data of restaurantr", this.adminService.restaurantData);
+    // this.addRestaurant = false;
+    this.Add_Rest = false;
+    this.Add_Branch = false;
+
+  }
+
+  addBranch(Restaurant_Name, Restaurant_Id) {
+    console.log(Restaurant_Name, Restaurant_Id, "name and id of restauyramt");
+    this.Add_Branch = true;
+    this.Add_Rest = false;
+    this.Mng_Rest = false
+    this.userService.addBranchData(Restaurant_Name, Restaurant_Id);
+    // this.Restaurant_Name = "";
+  }
+
+  editBranch(Restaurant_Name, Restaurant_Id) {
+    console.log(Restaurant_Name, Restaurant_Id, "name and id of restauyramt");
+
+  }
+
 }
