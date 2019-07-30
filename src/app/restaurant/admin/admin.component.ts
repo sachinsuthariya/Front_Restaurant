@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from './admin-service.service';
 import { UserServiceService } from '../user/user-service.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-admin',
@@ -12,6 +13,10 @@ export class AdminComponent implements OnInit {
   Add_Branch = false;
   Mng_Rest = false;
   list_Branch = false;
+
+  editData = {};
+  edit_Branch = new BehaviorSubject(this.editData);
+  share_EditBranch = this.edit_Branch.asObservable();
 
   Restaurant_Name: string;
   Restaurant_Id;
@@ -25,6 +30,8 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     let data = this.adminService.restaurantData;
     // console.log("data of restaurantr", data);
+
+
   }
 
   addRest() {
@@ -49,7 +56,7 @@ export class AdminComponent implements OnInit {
   }
 
   addBranch(Restaurant_Name, Restaurant_Id) {
-    console.log(Restaurant_Name, Restaurant_Id, "name and id of restauyramt");
+    // console.log(Restaurant_Name, Restaurant_Id, "name and id of restauyramt");
     this.Add_Branch = true;
     this.Add_Rest = false;
     this.Mng_Rest = false
@@ -59,7 +66,7 @@ export class AdminComponent implements OnInit {
   }
 
   editBranch(Restaurant_Name, Restaurant_Id) {
-    console.log(Restaurant_Name, Restaurant_Id, "name and id of restauyramt");
+    // console.log(Restaurant_Name, Restaurant_Id, "name and id of restauyramt");
 
     this.Add_Branch = false;
     this.Add_Rest = false;
@@ -69,4 +76,17 @@ export class AdminComponent implements OnInit {
     this.userService.getBranchList(Restaurant_Name, Restaurant_Id);
   }
 
+
+  isedit = false;
+
+  editBranchData(branch) {
+    this.editData = branch;
+    this.isedit = true; 
+    this.edit_Branch.next(this.editData);
+
+    this.Add_Branch = true;
+    this.list_Branch = false;
+    this.Mng_Rest = false;
+    this.Add_Rest = false;
+  }
 }

@@ -8,10 +8,11 @@
 
 <hr>
 
-<div *ngFor="let rest of restaurantList">
+<div *ngFor="let rest of restaurantList; let i = index">
   <a style="cursor: pointer" routerLinkActive="active"
     class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center"
     (click)="adminService.onRestaurant(rest.restaurantName, rest._id)">
+    <!-- [ngStyle]="(click) ? {'background-color': blue : 'white'}"> -->
 
     <div class=" flex-column">
       {{ rest.restaurantName }}

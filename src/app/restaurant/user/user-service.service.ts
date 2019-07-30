@@ -2,18 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  branchList: any;
+  branchList: [];
   listBranch = new BehaviorSubject(this.branchList);
   share_BranchList = this.listBranch.asObservable();
 
+
+
   RestaurantObj = {};
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private router: Router) { }
 
   AddBranch(branchData: object) {
     // console.log(branchData, "bramdch data from serviece");
@@ -48,4 +52,6 @@ export class UserServiceService {
 
       });
   }
+
+
 }
