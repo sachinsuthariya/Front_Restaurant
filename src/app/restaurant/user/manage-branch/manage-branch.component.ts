@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { Subscription } from 'rxjs';
 
@@ -7,14 +7,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './manage-branch.component.html',
   styleUrls: ['./manage-branch.component.css']
 })
-export class ManageBranchComponent implements OnInit {
+export class ManageBranchComponent implements OnInit, OnDestroy {
   branchList: any;
   branchsubscription: Subscription;
 
   constructor(private userService: UserServiceService) { }
 
   ngOnInit() {
-    this.userService.share_BranchList
+    this.branchsubscription = this.userService.share_BranchList
       .subscribe(res => {
         console.log("response of obs", res);
         this.branchList = res;
@@ -22,5 +22,10 @@ export class ManageBranchComponent implements OnInit {
       });
   }
 
+  ngOnDestroy() {
+    if (this.branchsubscription) {
+      this.branchsubscription.unsubscribe();
+    }
+  }
 
 }

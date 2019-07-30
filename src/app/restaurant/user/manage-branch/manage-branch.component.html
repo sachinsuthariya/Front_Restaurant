@@ -1,3 +1,30 @@
-<div *ngFor="let branch of branchList">
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Restaurant Name</th>
+        <th scope="col">Owner Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">City</th>
+        <th scope="col">Address</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let branch of branchList; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{branch.restaurantName}}</td>
+        <td>{{branch.ownerName}}</td>
+        <td>{{branch.email}}</td>
+        <td>{{branch.mobile}}</td>
+        <td>{{branch.city}}</td>
+        <td>{{branch.address}}</td>
+        <td><button class="btn btn-primary" (click)="editBranch(branch)">Edit</button></td>
+      </tr>
+
+    </tbody>
+  </table>
 
 </div>
