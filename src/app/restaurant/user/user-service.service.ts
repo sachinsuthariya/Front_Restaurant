@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
+
+  branchList: any;
+  listBranch = new BehaviorSubject(this.branchList);
+  share_BranchList = this.listBranch.asObservable();
 
   RestaurantObj = {};
   constructor(private http: HttpClient) { }
@@ -26,5 +31,21 @@ export class UserServiceService {
 
   getBranchData() {
     return this.RestaurantObj;
+  }
+
+  getBranchList(RestaurantName, RestaurantId) {
+    console.log("i ma branch list");
+    let branchData = {
+      RestaurantName: RestaurantName,
+      RestaurantId: RestaurantId
+    };
+    this.http.post(environment.API_URL + "restaurant/getBranchList", branchData)
+      .subscribe(response => {
+        let res = response;
+        this.branchList = res["body"];
+        console.log("branch List", this.branchList);
+        this.listBranch.next(this.branchList);
+
+      });
   }
 }

@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log(response);
 
       if (response["success"]) {
-        // console.log("success");
+
         if (response["body"][0]["isadmin"]) {
           this.router.navigate(["admin"]);
         } else {

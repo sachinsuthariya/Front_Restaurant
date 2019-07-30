@@ -82,50 +82,51 @@ export class AddBarchComponent implements OnInit {
     console.log(this.branchForm.controls.ownerName.value);
 
     let data = {
+      restaurantID: this.getBranch["RestaurantId"],
+      Parent_Rest: this.getBranch["RestaurantName"],
       ownerName: this.branchForm.controls.ownerName.value,
-      restName: this.branchForm.controls.resName.value,
+      restaurantName: this.branchForm.controls.resName.value,
       city: this.branchForm.controls.city.value,
       address: this.branchForm.controls.address.value,
       email: this.branchForm.controls.email.value,
       mobile: this.branchForm.controls.mobile.value,
-      parent_Res: this.getBranch["RestaurantName"],
-      Parent_Res_Id: this.getBranch["RestaurantId"]
+
     }
-    // this.spinner.show();
-    // this.addBranchSubscription = this.userService.AddBranch(this.branchForm.value)
-    //   .subscribe(res => {
-    //     console.log(res, "res");
-    //     const response = res;
-    //     if (response["success"]) {
+    this.spinner.show();
+    this.addBranchSubscription = this.userService.AddBranch(data)
+      .subscribe(res => {
+        console.log(res, "res");
+        const response = res;
+        if (response["success"]) {
 
-    //       this.notifier.notify("success", response["message"]);
-    //       this.branchForm.reset();
-    //       this.router.navigate(["login"]);
-    //     } else {
-    //       if (response["error"]["message"]) {
-    //         this.notifier.notify("error", response["error"]["message"]);
-    //       } else {
-    //         this.notifier.notify("error", response["message"]);
-    //       }
-    //       console.log(response["error"]["message"], "regisytrrersd");
+          this.notifier.notify("success", response["message"]);
+          this.branchForm.reset();
+          // this.router.navigate(["login"]);
+        } else {
+          // if (response["error"]["message"]) {
+          //   this.notifier.notify("error", response["error"]["message"]);
+          // } else {
+            this.notifier.notify("error", response["message"]);
+          }
+          // console.log(response["error"]["message"], "regisytrrersd");
 
-    //       // this.signupForm.reset();
-    //     }
-    //     this.spinner.hide();
-    //   }, err => {
-    //     this.spinner.hide();
-    //   });
+          // this.signupForm.reset();
+        // }
+        this.spinner.hide();
+      }, err => {
+        this.spinner.hide();
+      });
 
 
     //add  branch controller ma error che... node side
-    this.userService.AddBranch(data)
-      .subscribe(res => {
-        console.log("sassssssssssss =====>");
+    // this.userService.AddBranch(data)
+    //   .subscribe(res => {
+    //     console.log("sassssssssssss =====>");
 
-        console.log(res, "addbranch respons");
+    //     console.log(res, "addbranch respons");
 
-      })
-    console.log("Add  branch funnctionss", data);
+    //   })
+    // console.log("Add  branch funnctionss", data);
 
   }
 

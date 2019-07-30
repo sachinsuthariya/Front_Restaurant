@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../admin-service.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-list-restaurant',
@@ -16,11 +17,14 @@ export class ListRestaurantComponent implements OnInit {
 
   }
 
+  // search_rest: string;
   search(event) {
-    console.log(event.srcElement.value, "evnt");
-    let filter = event.srcElement.value;
+    console.log(event.srcElement.value, "evnt of searchh");
+    // let search = event.srcElement.value;
+    // this.restaurantList = this.restaurantList.filter(element => element === search);
 
-    // console.log(this.search, "sacj");
+
+
   }
 
   restaurant(event) {
@@ -38,7 +42,7 @@ export class ListRestaurantComponent implements OnInit {
         let response = res;
         this.restaurantList = response["body"][0];
 
-        console.log(this.restaurantList);
+        // console.log(this.restaurantList);
 
       });
   }
