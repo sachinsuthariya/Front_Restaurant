@@ -20,7 +20,9 @@ export class AddBarchComponent implements OnInit, OnDestroy {
 
   //variables
   addBranchSubscription: Subscription;
-  editbranchSubscription: Subscription;
+  editbranchDataSubscription: Subscription;
+  editBranchSubscription: Subscription;
+
   city = [
     "Ahmedabad",
     "Baroda",
@@ -31,9 +33,8 @@ export class AddBarchComponent implements OnInit, OnDestroy {
   isSubmitted = false;
   getBranch = {};
   editbranch: any = {
-
   };
-
+  formTitle = "Add Branch";
   constructor(private formBuilder: FormBuilder,
     private readonly notifier: NotifierService,
     private userService: UserServiceService,
@@ -65,7 +66,7 @@ export class AddBarchComponent implements OnInit, OnDestroy {
     console.log(this.admin.isedit, "observable in add branch");
 
     if (this.admin.isedit) {
-      this.editbranchSubscription = this.admin.share_EditBranch.subscribe(res => {
+      this.editbranchDataSubscription = this.admin.share_EditBranch.subscribe(res => {
         this.editbranch = res;
         console.log("edit branch in add branch", this.editbranch);
         if (this.editbranch) {
@@ -80,9 +81,14 @@ export class AddBarchComponent implements OnInit, OnDestroy {
       this.addBranchSubscription.unsubscribe();
     }
 
-    if (this.editbranchSubscription) {
-      this.editbranchSubscription.unsubscribe();
+    if (this.editbranchDataSubscription) {
+      this.editbranchDataSubscription.unsubscribe();
     }
+
+    if (this.editBranchSubscription) {
+      this.editBranchSubscription.unsubscribe();
+    }
+
   }
 
   // convience getter to easy access form field
@@ -97,6 +103,7 @@ export class AddBarchComponent implements OnInit, OnDestroy {
     if (this.branchForm.invalid) {
       return;
     }
+    // return console.log("add branch");
 
     let data = {
       restaurantID: this.getBranch["RestaurantId"],
@@ -119,37 +126,23 @@ export class AddBarchComponent implements OnInit, OnDestroy {
           this.branchForm.reset();
           // this.router.navigate(["login"]);
         } else {
-          // if (response["error"]["message"]) {
-          //   this.notifier.notify("error", response["error"]["message"]);
-          // } else {
           this.notifier.notify("error", response["message"]);
         }
-        // console.log(response["error"]["message"], "regisytrrersd");
 
-        // this.signupForm.reset();
-        // }
         this.spinner.hide();
       }, err => {
         this.spinner.hide();
       });
 
-
-    //add  branch controller ma error che... node side
-    // this.userService.AddBranch(data)
-    //   .subscribe(res => {
-    //     console.log("sassssssssssss =====>");
-
-    //     console.log(res, "addbranch respons");
-
-    //   })
-    // console.log("Add  branch funnctionss", data);
-
   }
 
   edit() {
-    // console.log(this.branchForm.value);
+
     this.branchForm.reset();
-    this.admin.isedit=false;
+    this.admin.isedit = false;
+
+    this.formTitle = "Edit Branch";
+
     let data = {
       resName: this.editbranch.restaurantName,
       ownerName: this.editbranch.ownerName,
@@ -158,30 +151,60 @@ export class AddBarchComponent implements OnInit, OnDestroy {
       city: this.editbranch.city,
       address: this.editbranch.address
     }
-    // this.branchForm.controls.value = data;
-    console.log(data, "resta");
-    // this.branchForm.controls.resName.value = data.resName;
-    // this.branchForm.controls.ownerName.value = data.ownerName;
-    // this.branchForm.controls.mobile.value = data.mobile;
-    // this.branchForm.controls.email.value = data.email;
-    // this.branchForm.controls.city.value = data.city;
-    // this.branchForm.controls.address.value = data.address;
 
     this.branchForm.controls['resName'].setValue(data.resName);
     this.branchForm.controls['ownerName'].setValue(data.ownerName);
+    this.branchForm.controls['address'].setValue(data.mobile);
     this.branchForm.controls['mobile'].setValue(data.mobile);
     this.branchForm.controls['email'].setValue(data.email);
     this.branchForm.controls['city'].setValue(data.city);
 
-    // this.branchForm.controls.resName.value =  this.editbranch.restaurantName,
-    // ownerName: this.editbranch.ownerName,
-    //   mobile: this.editbranch.mobile,
-    //     email: this.editbranch.email,
-    //       city: this.editbranch.city,
-    //         address: this.editbranch.address
-
-
   }
 
+  onEditBranch() {
+    // console.log("edit function ");
+
+    this.isSubmitted = true;
+
+    if (this.branchForm.invalid) {
+      return;
+    }
+    if (this.branchForm.pristine) {
+      return this.notifier.notify("warning", "No change detect");
+    }
+    else {
+      let data = {
+        ID: this.editbranch._id,
+        restaurantID: this.editbranch.restaurantID,
+        Parent_Rest: this.editbranch.Parent_Rest,
+        ownerName: this.branchForm.controls.ownerName.value,
+        restaurantName: this.branchForm.controls.resName.value,
+        city: this.branchForm.controls.city.value,
+        address: this.branchForm.controls.address.value,
+        email: this.branchForm.controls.email.value,
+        mobile: this.branchForm.controls.mobile.value,
+      }
+
+      this.spinner.show();
+      this.editBranchSubscription = this.userService.updateBranch(data)
+        .subscribe(res => {
+          const response = res;
+          console.log("response of ", res);
+
+          if (response["success"]) {
+
+            this.notifier.notify("success", response["message"]);
+
+          } else {
+            this.notifier.notify("error", response["message"]);
+          }
+
+          this.spinner.hide();
+        }, err => {
+          this.spinner.hide();
+        });
+
+    }
+  }
 
 }

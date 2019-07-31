@@ -20,8 +20,6 @@ export class UserServiceService {
     private router: Router) { }
 
   AddBranch(branchData: object) {
-    // console.log(branchData, "bramdch data from serviece");
-
     return this.http.post(environment.API_URL + "restaurant/addBranch", branchData);
   }
 
@@ -51,6 +49,10 @@ export class UserServiceService {
         this.listBranch.next(this.branchList);
 
       });
+  }
+
+  updateBranch(updateData: any) {
+    return this.http.post(environment.API_URL + "restaurant/updateBranch", updateData);
   }
 
 

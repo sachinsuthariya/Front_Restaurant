@@ -24,7 +24,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private notifier: NotifierService,
     private loginService: LoginService,
-    private router: Router) { }
+    private router: Router) {
+
+    if (this.loginService.isLogin) {
+      this.router.navigate(["/"])
+    }
+
+  }
 
   ngOnInit() {
 
