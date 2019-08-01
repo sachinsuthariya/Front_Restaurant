@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+
 })
 export class AdminComponent implements OnInit {
   Add_Rest = true;
@@ -29,14 +30,9 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     let data = this.adminService.restaurantData;
-    // console.log("data of restaurantr", data);
-
-
   }
 
   addRest() {
-    // this.addRestaurant = true;
-    // this.Restaurant_Name = "";
     this.Add_Rest = true;
     this.Add_Branch = false;
     this.Mng_Rest = false;
@@ -81,7 +77,9 @@ export class AdminComponent implements OnInit {
 
   editBranchData(branch) {
     this.editData = branch;
-    this.isedit = true; 
+    console.log("edit branch data from user side ", this.editData);
+
+    this.isedit = true;
     this.edit_Branch.next(this.editData);
 
     this.Add_Branch = true;

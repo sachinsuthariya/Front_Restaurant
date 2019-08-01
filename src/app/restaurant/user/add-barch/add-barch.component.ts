@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../user-service.service';
 import { AdminComponent } from '../../admin/admin.component';
+import { UserComponent } from '../user.component';
 
 @Component({
   selector: 'app-add-barch',
@@ -40,7 +41,8 @@ export class AddBarchComponent implements OnInit, OnDestroy {
     private userService: UserServiceService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private admin: AdminComponent) { }
+    private admin: AdminComponent,
+    private user: UserComponent) { }
 
   ngOnInit() {
     //validators
@@ -161,6 +163,7 @@ export class AddBarchComponent implements OnInit, OnDestroy {
 
   }
 
+  mng_branch: boolean;
   onEditBranch() {
     // console.log("edit function ");
 
@@ -194,7 +197,7 @@ export class AddBarchComponent implements OnInit, OnDestroy {
           if (response["success"]) {
 
             this.notifier.notify("success", response["message"]);
-
+            // this.router.navigate(["/user"]);
           } else {
             this.notifier.notify("error", response["message"]);
           }
@@ -206,5 +209,7 @@ export class AddBarchComponent implements OnInit, OnDestroy {
 
     }
   }
+
+
 
 }

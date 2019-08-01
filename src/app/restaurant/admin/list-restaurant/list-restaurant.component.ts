@@ -21,7 +21,6 @@ export class ListRestaurantComponent implements OnInit {
   search(event) {
     let search = event.srcElement.value;
     this.restaurantList = this.restFilter.filter(ele => ele.restaurantName.toLowerCase().includes(search.toLowerCase()));
-
   }
 
   restaurant(event) {

@@ -24,6 +24,8 @@ export class UserServiceService {
   }
 
   addBranchData(Restaurant_Name, Restaurant_Id) {
+    console.log("in user sevice ad branch", Restaurant_Name, Restaurant_Id);
+
     return this.RestaurantObj = {
       RestaurantName: Restaurant_Name,
       RestaurantId: Restaurant_Id
@@ -45,15 +47,19 @@ export class UserServiceService {
       .subscribe(response => {
         let res = response;
         this.branchList = res["body"];
+
         console.log("branch List", this.branchList);
         this.listBranch.next(this.branchList);
-
+        // return res["body"];
       });
   }
 
   updateBranch(updateData: any) {
-    return this.http.post(environment.API_URL + "restaurant/updateBranch", updateData);
+    return this.http.put(environment.API_URL + "restaurant/updateBranch", updateData);
   }
 
+  // userEdit(data) {
+  //   return data = true;
+  // }
 
 }

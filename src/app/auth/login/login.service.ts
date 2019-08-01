@@ -20,6 +20,17 @@ export class LoginService {
     return localStorage.getItem("token");
   }
 
+  getLocalStorageData() {
+    return {
+      _id: localStorage.getItem("_id"),
+      restaurantName: localStorage.getItem("restaurantName"),
+      username: localStorage.getItem("username"),
+      ownerName: localStorage.getItem("ownerName"),
+      city: localStorage.getItem("city"),
+      address: localStorage.getItem("address")
+    };
+  }
+
   Logout() {
     return localStorage.clear();
   }

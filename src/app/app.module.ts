@@ -18,6 +18,7 @@ import { AdminComponent } from './restaurant/admin/admin.component';
 import { ListRestaurantComponent } from './restaurant/admin/list-restaurant/list-restaurant.component';
 import { AddBarchComponent } from './restaurant/user/add-barch/add-barch.component';
 import { ManageBranchComponent } from './restaurant/user/manage-branch/manage-branch.component';
+import { ListBranchComponent } from './restaurant/user/list-branch/list-branch.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ManageBranchComponent } from './restaurant/user/manage-branch/manage-br
     ListRestaurantComponent,
     AddBarchComponent,
     ManageBranchComponent,
+    ListBranchComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { ManageBranchComponent } from './restaurant/user/manage-branch/manage-br
     NotifierModule,
     NgxSpinnerModule
   ],
-  providers: [],
+  providers: [AdminComponent, UserComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

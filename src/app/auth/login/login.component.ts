@@ -79,9 +79,17 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigate(["user"]);
         }
         let token = response["body"][0]["token"];
-        console.log("token", token);
+        let auth_user = response["body"][0]["user"];
+        console.log("auth user", auth_user, token);
 
         localStorage.setItem("token", token);
+        localStorage.setItem("_id", auth_user._id);
+        localStorage.setItem("username", auth_user.username);
+        localStorage.setItem("restaurantName", auth_user.restaurantName);
+        localStorage.setItem("ownerName", auth_user.ownerName);
+        localStorage.setItem("city", auth_user.city);
+        localStorage.setItem("address", auth_user.address);
+
         this.notifier.notify("success", response["message"]);
       } else {
         this.loginForm.reset();

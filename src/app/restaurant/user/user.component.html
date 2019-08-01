@@ -1,2 +1,57 @@
-<!-- <p>user works!</p> -->
-app-
+<button class="btn btn-primary left_btn" (click)="addRest()">Add Branch</button>
+<!-- <hr> -->
+<div class="row" style="padding-top: 100px">
+  <div class="col-md-3" style="padding-left: 200px">
+    <!-- <app-list-restaurant (click)="onRestaurantData()"></app-list-restaurant> -->
+    <app-list-branch></app-list-branch>
+
+  </div>
+
+  <div class="col-md-7" style="padding-left: 100px">
+    <div class="rest">
+
+      <app-add-barch *ngIf="Add_Branch"></app-add-barch>
+
+      <!-- <app-manage-branch *ngIf="list_Branch"></app-manage-branch> -->
+
+
+      <!-- Restaurant Management -->
+      <div *ngIf="Mng_Branch">
+        <h2 class="rest_area"><strong>Manage {{BranchName}} Restaurant.
+          </strong> </h2>
+        <hr>
+
+        <a routerLinkActive="active"
+          class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center btn btn-primary mng_rest"
+          (click)="onEdit(BranchDetail)">
+
+          <div class=" flex-column">
+            <h3>Edit Exist {{BranchName}} Restaurant.</h3>
+          </div>
+          <div class="image-parent">
+            <img src="https://pearlmorissette.com/images/TheRestaurant.png" class="img-fluid" [alt]="aa"
+              style="max-width: 80px">
+          </div>
+
+        </a>
+
+        <a routerLinkActive="active"
+          class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center btn btn-primary mng_rest"
+          (click)="addBranch(Restaurant_Name, Restaurant_Id)">
+
+          <div class=" flex-column">
+            <h3>Add New {{BranchName}} Restaurant.</h3>
+          </div>
+          <div class="image-parent">
+            <img src="https://pearlmorissette.com/images/TheRestaurant.png" class="img-fluid" [alt]="aa"
+              style="max-width: 80px">
+          </div>
+
+        </a>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
