@@ -35,15 +35,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     //form control validators
-    // this.loginForm = this.formBuilder.group({
-    //   email: ["", [Validators.email, Validators.required]],
-    //   password: ["", Validators.required]
-    // });
-
     this.loginForm = this.formBuilder.group({
-      email: [""],
-      password: [""]
+      email: ["", [Validators.email, Validators.required]],
+      password: ["", Validators.required]
     });
+
+    // this.loginForm = this.formBuilder.group({
+    //   email: [""],
+    //   password: [""]
+    // });
   }
 
 
@@ -67,9 +67,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     this.spinner.show();
     this.loginSubscription = this.loginService.onLogin(this.loginForm.value).subscribe(res => {
-      console.log(res);
+
       let response = res;
-      console.log(response);
 
       if (response["success"]) {
 
@@ -80,7 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
         let token = response["body"][0]["token"];
         let auth_user = response["body"][0]["user"];
-        console.log("auth user", auth_user, token);
+
 
         localStorage.setItem("token", token);
         localStorage.setItem("_id", auth_user._id);

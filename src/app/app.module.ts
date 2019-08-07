@@ -19,6 +19,9 @@ import { ListRestaurantComponent } from './restaurant/admin/list-restaurant/list
 import { AddBarchComponent } from './restaurant/user/add-barch/add-barch.component';
 import { ManageBranchComponent } from './restaurant/user/manage-branch/manage-branch.component';
 import { ListBranchComponent } from './restaurant/user/list-branch/list-branch.component';
+import { MenuComponent } from './restaurant/admin/menu/menu.component';
+import { AddMenuItemComponent } from './restaurant/admin/menu/add-menu-item/add-menu-item.component';
+import { ListMenuItemComponent } from './restaurant/admin/menu/list-menu-item/list-menu-item.component';
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import { ListBranchComponent } from './restaurant/user/list-branch/list-branch.c
     AddBarchComponent,
     ManageBranchComponent,
     ListBranchComponent,
+    MenuComponent,
+    AddMenuItemComponent,
+    ListMenuItemComponent,
   ],
   imports: [
     BrowserModule,

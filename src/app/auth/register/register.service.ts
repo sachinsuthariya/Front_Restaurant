@@ -13,6 +13,8 @@ export class RegisterService implements OnInit {
     registerRestaurant(restaurantData: object) {
         return this.http.post(environment.API_URL + "restaurant/register", restaurantData);
     }
+
+
     ngOnInit() {
 
     }

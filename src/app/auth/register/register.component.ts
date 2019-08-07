@@ -39,24 +39,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    //validators
+    // validators
+    this.signupForm = this.formBuilder.group({
+      ownerName: ["", Validators.required],
+      resName: ["", Validators.required],
+      city: ["", Validators.required],
+      address: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      mobile: ["", Validators.required]
+    });
+
     // this.signupForm = this.formBuilder.group({
     //   ownerName: [""],
     //   resName: [""],
     //   city: [""],
     //   address: [""],
-    //   email: ["", [Validators.required, Validators.email]],
+    //   email: [""],
     //   mobile: [""]
     // })
-
-    this.signupForm = this.formBuilder.group({
-      ownerName: [""],
-      resName: [""],
-      city: [""],
-      address: [""],
-      email: [""],
-      mobile: [""]
-    })
 
   }
 
@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
           this.notifier.notify("success", response["message"]);
           this.signupForm.reset();
-          this.router.navigate(["login"]);
+
         } else {
           if (response["error"]["message"]) {
             this.notifier.notify("error", response["error"]["message"]);

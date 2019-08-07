@@ -1,0 +1,47 @@
+<div class="container" style="padding-top: 30px">
+  <h3 class="title">Add Menu Item</h3>
+  <hr>
+  <form [formGroup]="MenuForm" (ngSubmit)="addMenu()">
+
+    <div class="form-group">
+      <label for="restaurantId">Restaurant Name</label>
+      <!-- <input type="text" id="restaurantName" formControlName="restaurantName" class="form-control"> -->
+      <select formControlName="restaurantId" id="restaurantId" class="form-control">
+        <option value="">---Please Select Restaurant---</option>
+        <option *ngFor="let res of RestaurantList" [value]="res._id">{{res.restaurantName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="item">Menu Item</label>
+      <input type="text" id="item" formControlName="item" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="image">Choose Image Item</label>
+      <input #file type="file" accept="image/*" id="image" formControlName="image" (change)="preview(file.files)"
+        class="form-control btn btn-primary">
+    </div>
+
+    <div>
+      <img [src]="imgURL" height="200" *ngIf="imgURL">
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select formControlName="category" id="category" class="form-control">
+        <option value="">---Select Category---</option>
+        <option *ngFor="let element of category" [value]="element">{{element}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" formControlName="price" class="form-control">
+    </div>
+
+    <button class="btn btn-primary" type="submit">Save</button> |
+    <button class="btn btn-danger" type="reset">Clear</button>
+
+  </form>
+</div>

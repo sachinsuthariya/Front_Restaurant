@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   Mng_Rest = false;
   list_Branch = false;
 
+
   editData = {};
   edit_Branch = new BehaviorSubject(this.editData);
   share_EditBranch = this.edit_Branch.asObservable();

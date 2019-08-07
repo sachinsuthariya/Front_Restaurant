@@ -4,7 +4,7 @@
   <div class="form-group">
     <label for="ownerName">Owner Name</label>
     <input type="text" formControlName="ownerName" id="ownerName" class="form-control"
-      [ngClass]="{ 'is-invalid': isSubmitted && form.ownerName.errors }" />
+      [ngClass]="{ 'is-invalid': isSubmitted && form.ownerName.errors }" required />
     <div *ngIf="isSubmitted && form.ownerName.errors" class="invalid-feedback">
       <div *ngIf="form.ownerName.errors.required">Please Enter owner name</div>
     </div>
@@ -13,7 +13,7 @@
   <div class="form-group">
     <label for="resName">Restaurant Name</label>
     <input type="text" formControlName="resName" id="resName" class="form-control"
-      [ngClass]="{ 'is-invalid': isSubmitted && form.resName.errors }" />
+      [ngClass]="{ 'is-invalid': isSubmitted && form.resName.errors }" required />
     <div *ngIf="isSubmitted && form.resName.errors" class="invalid-feedback">
       <div *ngIf="form.resName.errors.required">Please enter restaurant name</div>
     </div>
@@ -23,7 +23,7 @@
     <label for="city">City</label>
 
     <select formControlName="city" id="city" class="form-control"
-      [ngClass]="{ 'is-invalid': isSubmitted && form.city.errors }">
+      [ngClass]="{ 'is-invalid': isSubmitted && form.city.errors }" required>
       <option value="">---Select City---</option>
       <option *ngFor="let cityname  of city" [value]="cityname"> {{cityname}} </option>
     </select>
@@ -36,7 +36,7 @@
   <div class="form-group">
     <label for="address">Address</label>
     <textarea formControlName="address" id="address" class="form-control" cols="30"
-      [ngClass]="{ 'is-invalid': isSubmitted && form.city.errors }"></textarea>
+      [ngClass]="{ 'is-invalid': isSubmitted && form.city.errors }" required></textarea>
     <div *ngIf="isSubmitted && form.address.errors" class="invalid-feedback">
       <div *ngIf="form.address.errors.required">Please choose city</div>
     </div>
@@ -45,7 +45,7 @@
   <div class="form-group">
     <label for="Email">Email</label>
     <input type="email" formControlName="email" class="form-control"
-      [ngClass]="{ 'is-invalid': isSubmitted && form.email.errors }" />
+      [ngClass]="{ 'is-invalid': isSubmitted && form.email.errors }" required />
     <div *ngIf="isSubmitted && form.email.errors" class="invalid-feedback">
       <div *ngIf="form.email.errors.required">Please enter email</div>
       <div *ngIf="form.email.touched && form.email.invalid"> Please enter valid email </div>
@@ -54,8 +54,8 @@
 
   <div class="form-group">
     <label for="mobile">Mobile</label>
-    <input type="text" formControlName="mobile" id="mobile" class="form-control"
-      [ngClass]="{ 'is-invalid': isSubmitted && form.mobile.errors }" />
+    <input type="text" formControlName="mobile" id="mobile" oninput="this.value=this.value.replace(/[^\d+]/g, '')"
+      class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && form.mobile.errors }" required />
     <div *ngIf="isSubmitted && form.mobile.errors" class="invalid-feedback">
       <div *ngIf="form.mobile.errors.required">Please enter mobile number</div>
     </div>

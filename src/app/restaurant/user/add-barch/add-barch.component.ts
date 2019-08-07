@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { RegisterService } from 'src/app/auth/register/register.service';
@@ -7,7 +7,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../user-service.service';
 import { AdminComponent } from '../../admin/admin.component';
-import { UserComponent } from '../user.component';
 
 @Component({
   selector: 'app-add-barch',
@@ -41,36 +40,27 @@ export class AddBarchComponent implements OnInit, OnDestroy {
     private userService: UserServiceService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private admin: AdminComponent,
-    private user: UserComponent) { }
+    private admin: AdminComponent) { }
 
   ngOnInit() {
     //validators
-    // this.signupForm = this.formBuilder.group({
-    //   ownerName: [""],
-    //   resName: [""],
-    //   city: [""],
-    //   address: [""],
-    //   email: ["", [Validators.required, Validators.email]],
-    //   mobile: [""]
-    // })
 
     this.branchForm = this.formBuilder.group({
-      ownerName: [""],
-      resName: [""],
-      city: [""],
-      address: [""],
-      email: [""],
-      mobile: [""]
+      ownerName: ["", Validators.required],
+      resName: ["", Validators.required],
+      city: ["", Validators.required],
+      address: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      mobile: ["", Validators.required]
     });
 
     this.getBranch = this.userService.getBranchData();
-    console.log(this.admin.isedit, "observable in add branch");
+
 
     if (this.admin.isedit) {
       this.editbranchDataSubscription = this.admin.share_EditBranch.subscribe(res => {
         this.editbranch = res;
-        console.log("edit branch in add branch", this.editbranch);
+
         if (this.editbranch) {
           this.edit();
         }
@@ -105,7 +95,7 @@ export class AddBarchComponent implements OnInit, OnDestroy {
     if (this.branchForm.invalid) {
       return;
     }
-    // return console.log("add branch");
+
 
     let data = {
       restaurantID: this.getBranch["RestaurantId"],
@@ -126,7 +116,6 @@ export class AddBarchComponent implements OnInit, OnDestroy {
 
           this.notifier.notify("success", response["message"]);
           this.branchForm.reset();
-          // this.router.navigate(["login"]);
         } else {
           this.notifier.notify("error", response["message"]);
         }
@@ -165,7 +154,6 @@ export class AddBarchComponent implements OnInit, OnDestroy {
 
   mng_branch: boolean;
   onEditBranch() {
-    // console.log("edit function ");
 
     this.isSubmitted = true;
 
@@ -192,12 +180,9 @@ export class AddBarchComponent implements OnInit, OnDestroy {
       this.editBranchSubscription = this.userService.updateBranch(data)
         .subscribe(res => {
           const response = res;
-          console.log("response of ", res);
 
           if (response["success"]) {
-
             this.notifier.notify("success", response["message"]);
-            // this.router.navigate(["/user"]);
           } else {
             this.notifier.notify("error", response["message"]);
           }

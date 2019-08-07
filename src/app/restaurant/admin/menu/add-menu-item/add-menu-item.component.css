@@ -1,0 +1,8 @@
+.title {
+  font-weight: bold;
+  font-family: 'Courier New';
+  background-color: cadetblue;
+  padding: 10px;
+  padding-right: 0px;
+  border: 1px solid black;
+}

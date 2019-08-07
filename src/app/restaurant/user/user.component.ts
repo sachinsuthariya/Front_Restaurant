@@ -23,6 +23,9 @@ export class UserComponent implements OnInit {
   Restaurant_Id;
 
 
+  BranchName: string;
+  BranchDetail: object;
+
   constructor(private adminService: AdminServiceService,
     private userService: UserServiceService,
     private loginService: LoginService,
@@ -32,10 +35,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     let data = this.loginService.getLocalStorageData();
-    // if (this.Mng_Branch) {
-    //   this.Mng_Branch = true;
-    //   this.Add_Branch = false
-    // }
   }
 
   // addBranch(Restaurant_Name, Restaurant_Id) {
@@ -78,15 +77,12 @@ export class UserComponent implements OnInit {
   //   this.Add_Rest = false;
   // }
 
-  BranchName: string;
-  BranchDetail: object;
+
   onBranchclick(branch) {
-    console.log(branch, "from user branch");
     this.BranchDetail = branch;
     this.BranchName = branch.restaurantName;
     this.Add_Branch = false;
     this.Mng_Branch = true;
-    // this.Add_Branch = true;
   }
 
   onEdit(branch) {

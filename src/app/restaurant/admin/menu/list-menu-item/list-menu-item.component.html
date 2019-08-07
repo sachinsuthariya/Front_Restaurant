@@ -1,0 +1,28 @@
+<!-- <p>list-menu-item works!</p> -->
+<div>
+  <input type="text" placeholder="Search restaurant" (keyup)="search($event)" class="form-control"><br>
+  <select name="rest" class="form-control" (change)="restaurant($event)">
+    <option value="">---Select Restaurant---</option>
+    <option *ngFor="let i of MenuList" [value]="i.item">{{i.item}}</option>
+  </select>
+</div>
+
+<hr>
+
+<div *ngFor="let menu of MenuList; let i = index">
+  <a style="cursor: pointer" routerLinkActive="active"
+    class="list-group-item clearfix list-group-item-action d-flex justify-content-between align-items-center"
+    (click)="onRestaurant(menu.restaurantName, menu._id)">
+    <!-- [ngStyle]="(click) ? {'background-color': blue : 'white'}"> -->
+
+    <div class=" flex-column">
+      {{ menu.item }}
+      <p><small>{{ menu.price }}</small></p>
+    </div>
+    <div class="image-parent">
+      <img src="https://pearlmorissette.com/images/TheRestaurant.png" class="img-fluid" [alt]="menu.item"
+        style="max-width: 80px">
+    </div>
+
+  </a>
+</div>
